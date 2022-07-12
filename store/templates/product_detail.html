@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+<!--Sub category body-->
+{% for detail in braceletdetails%}
+<div class="product">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="current_page">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="{{ url_for('main.getsubcategory', categoryid=category.id) }}">{{category.name}}</a></li>
+            <li>{{detail.name}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row product_row">
+
+      <!-- Product Image -->
+      <div class="col-lg-7">
+        <div class="product_image">
+          <div class="product_image_large"><img src="{{url_for('static', filename='/img/'+detail.image)}}" alt=""></div>
+        </div>
+      </div>
+
+      <!-- Product Content -->
+      <div class="col-lg-5">
+        <div class="product_content">
+          <div class="product_name" id="product_name">{{detail.name}}</div>
+          <div class="product_price" id="price">{{"$%.2f"|format(detail.price)}}</div>
+          <div class="product_text">
+            <b>SKU: </b>
+            <p id="sku">{{detail.SKU}}</p>
+            <b>Description: </b>
+            <p id="description">{{detail.description}}</p>
+          </div>
+          <!-- Product Quantity -->
+          <!-- <div class="product_quantity_container">
+            <span>Quantity</span>
+            <div class="row">
+              <div class="col-lg-6 col-sm-6 col-xs-6">
+                <div class="filterBox">
+                  <select class="form-control">
+                    <option value="1">Quantity</option>
+                    <option value="2" selected>1</option>
+                    <option value="3">2</option>
+                    <option value="4">3</option>
+                    <option value="5">4</option>
+                    <option value="6">5</option>
+                    <option value="7">6</option>
+                    <option value="8">7</option>
+                    <option value="9">8</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <!-- Product Size -->
+          <!-- <div class="product_size_container">
+            <span>Size</span>
+            <div class="product_size">
+              <ul class="d-flex flex-row align-items-start justify-content-start">
+                <li>
+                  <input type="radio" id="radio_1" name="product_radio" class="regular_radio radio_1">
+                  <label for="radio_1">XS(17cm)</label>
+                </li>
+                <li>
+                  <input type="radio" id="radio_2" name="product_radio" class="regular_radio radio_2" checked>
+                  <label for="radio_2">S(19cm)</label>
+                </li>
+                <li>
+                  <input type="radio" id="radio_3" name="product_radio" class="regular_radio radio_3">
+                  <label for="radio_3">M(21cm)</label>
+                </li>
+                <li>
+                  <input type="radio" id="radio_4" name="product_radio" class="regular_radio radio_4">
+                  <label for="radio_4">L(23cm)</label>
+                </li>
+              </ul>
+            </div> -->
+            <!-- <div class="button cart_button"> -->
+            <form action="{{ url_for('main.order') }}">
+              <input type="hidden" id="bracelet_id" name="bracelet_id" value="{{ detail.id }}">
+              <input class="btn cart_button button" type="submit" value="Add to Basket">
+            </form>
+            <!-- </div> -->
+            <!-- <div class="button">
+              <form action="{{ url_for('main.order') }}">
+                <input type="hidden" id="bracelet_id" name="bracelet_id" value="{{ detail.id }}">
+                <input class="btn cart_button" type="submit" value="Add to Basket">
+              </form>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

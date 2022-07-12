@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+<!--Sub category body-->
+
+<div class="container">
+    <div class="d-flex mt-100">
+      <div class="row">
+        <div class="current_page">
+          <ul>
+            <li><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li>Search details</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5">
+      <div class="row">
+        {% if isEmpty == 0 %}
+        {% for bracelet in bracelets%}
+        <div class="col-md-3">
+          <div class="card">
+            <img src="{{url_for('static', filename='/img/'+bracelet.image)}}">
+            <div class="card-body">
+              <div class="product_info">
+                <div class="product_name"><a href="{{ url_for('main.getproductdetails', braceletid=bracelet.id, categoryid=bracelet.category_id) }}">{{bracelet.name}}</a></div>
+                <div class="product_price">{{"$%.2f"|format(bracelet.price)}}</div>
+              </div>
+              <div class="product-action">
+                <div class="product-action-style product_buy">
+                  <form id="orderform_{{bracelet.id}}" action="{{ url_for('main.order') }}">
+                    <input type="hidden" id="bracelet_id" name="bracelet_id" value="{{ bracelet.id }}"> 
+                    <input type="hidden" id="bracelet_name" name="bracelet_name" value="{{ bracelet.name }}"> 
+                    <a class="action-cart" title="Add To Cart" onclick="document.getElementById('orderform_{{bracelet.id}}').submit()" data-abc="true">
+                      <i class="fa fa-shopping-cart"></i>
+                    </a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+          <div><p>We cannot find any bracelet by your searching: {{search_content}}</p></div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

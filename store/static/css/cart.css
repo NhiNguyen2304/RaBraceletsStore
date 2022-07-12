@@ -1,0 +1,65 @@
+.table-responsive{
+    font-family: 'Lucida', serif;
+}
+.table-header{
+    background-color: #937c6f;
+    font-family: 'Lucida', serif;
+	font-size: 14px;
+	font-weight: 400;
+}
+.button{
+    background: #222222;
+    color: white;
+}
+#minus-quantity{
+    width: 14px;
+    height: 30px;
+}
+#plus-quantity{
+    width: 14px;
+    height: 30px;
+}
+.button_custom{
+    width: 142px;
+    background: #222222;
+	height: 46px;
+	font-size: 14px;
+	text-align: center;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+
+.button_custom a{
+    text-decoration: none!;
+    background: #222222;
+    color: white;
+}
+
+.button:hover
+{
+	color: #937c6f;
+    background: #222222;
+}
+
+#customerForm{
+    width: 100%;
+}
+
+.button_custom{
+    background: #222222;;
+    width: 100%;
+}
+
+.button_custom:hover
+{
+	color: #937c6f;
+    background: #222222;
+}
+.button_custom a:hover{
+    color: #937c6f;
+    background: #222222;
+}
+

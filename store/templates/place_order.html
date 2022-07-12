@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main %}
+
+<div class="category">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <div class="section_subtitle">Place Order</div>
+                </div>
+                <div class="current_page">
+                    <ul>
+                      <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                      <li><a href="{{url_for('main.order')}}">Shopping Cart</a></li>
+                      <li>Place Order</li>
+                    </ul>
+                </div>
+
+                <!--Shopping cart-->
+                <div class="pb-5">
+                    <div class="container">
+
+                        <div class="row py-5 p-4 bg-white rounded shadow-sm">
+                            <div class="col-lg-6">
+                                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">
+                                    Personal Information
+                                </div>
+                                <div class="p-4">
+                                    <p class="font-italic mb-4">If you want to order, please fill out <b>mandantory</b> fileds below: *</p>
+                                    <div class="input-group mb-4 border rounded-pill p-2">
+                                            {{wtf.quick_form(form)}}
+                                            <!-- <form action="{{ url_for('main.checkout') }}">
+                                                <button class="btn my-2 my-sm-0 button button_custom" id="btnPlaceOrder"
+                                                type="submit">Check Out</button>
+                                            </form> -->
+                                            <!-- <button class="btn my-2 my-sm-0 button button_custom" id="btnPlaceOrder"
+                                                type="submit">Place Order</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                                <div class="p-4">
+                                    <p class="font-italic mb-4">Shipping and additional costs are calculated based
+                                        on values you have entered.</p>
+                                    <ul class="list-unstyled mb-4">
+                                        {% for bracelet in order.bracelets %}
+                                        <li class="d-flex justify-content-between py-3 border-bottom">
+                                            <strong class="font-italic mb-4">{{bracelet.name}}({{bracelet.SKU}})</strong>
+                                        </li>
+                                        <li class="d-flex justify-content-between py-3 border-bottom">
+                                            <strong class="text-muted">Order Subtotal </strong>
+                                            <strong>{{"$%.2f"|format(bracelet.price)}}</strong>
+                                        </li>
+                                        <!-- <li class="d-flex justify-content-between py-3 border-bottom">
+                                            <strong class="text-muted">
+                                                Shipping and handling
+                                            </strong>
+                                            <strong>$10.00</strong>
+                                        </li>
+                                        <li class="d-flex justify-content-between py-3 border-bottom">
+                                            <strong class="text-muted">Tax</strong>
+                                            <strong>$0.00</strong>
+                                        </li>
+                                        <li class="d-flex justify-content-between py-3 border-bottom">
+                                            <strong class="text-muted">Total</strong>
+                                            <h5 class="font-weight-bold">$105.00</h5> 
+                                        </li>-->
+                                        {% endfor %}
+                                        <li class="d-flex justify-content-between py-3 border-bottom">
+                                            <strong class="text-muted">Total</strong>
+                                            <h5 class="font-weight-bold">{{"$%.2f"|format(totalprice)}}</h5> 
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

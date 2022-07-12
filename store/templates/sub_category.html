@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+<!--Sub category body-->
+
+<div class="container">
+    <div class="d-flex mt-100">
+      <div class="row">
+        <div class="current_page">
+          <ul>
+            <li><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li>{{category.name}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5">
+      <div class="row">
+        {% for bracelet in braceincategory%}
+        <div class="col-md-3">
+          <div class="card">
+            <img src="{{url_for('static', filename='/img/'+bracelet.image)}}">
+            <div class="card-body">
+              <div class="product_info">
+                <div class="product_name"><a href="{{ url_for('main.getproductdetails', braceletid=bracelet.id, categoryid=category.id) }}">{{bracelet.name}}</a></div>
+                <div class="product_price">{{"$%.2f"|format(bracelet.price)}}</div>
+              </div>
+              <div class="product-action">
+                <div class="product-action-style product_buy">
+                  <form id="orderform_{{bracelet.id}}" action="{{ url_for('main.order') }}">
+                    <input type="hidden" id="bracelet_id" name="bracelet_id" value="{{ bracelet.id }}"> 
+                    <a class="action-cart" title="Add To Cart" onclick="document.getElementById('orderform_{{bracelet.id}}').submit()" data-abc="true">
+                      <i class="fa fa-shopping-cart"></i>
+                    </a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <!-- <div class="col-md-3">
+          <div class="card">
+            <img src="../img/ChainBracelets/lerwick_mooring_silver_chain.jpg">
+            <div class="card-body">
+              <div class="product_info">
+                <div class="product_name"><a href="product_detail.html">Lerwick Mooring Silver</a></div>
+                <div class="product_price">$65.00</div>
+              </div>
+              <div class="product-action">
+                <div class="product-action-style product_buy">
+                  <a class="action-cart" title="Add To Cart" href="#" data-abc="true">
+                    <i class="fa fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="card">
+            <img src="../img/ChainBracelets/london_mooring_silver_chain.jpg">
+            <div class="card-body">
+              <div class="product_info">
+                <div class="product_name"><a href="product_detail.html">London Mooring Silver</a></div>
+                <div class="product_price">$85.00</div>
+              </div>
+              <div class="product-action">
+                <div class="product-action-style product_buy">
+                  <a class="action-cart" title="Add To Cart" href="#" data-abc="true">
+                    <i class="fa fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="card">
+            <img src="../img/ChainBracelets/Tyne-mooring-silver.jpg">
+            <div class="card-body">
+              <div class="product_info">
+                <div class="product_name"><a href="product_detail.html">Tyne Mooring Silver</a></div>
+                <div class="product_price">$95.00</div>
+              </div>
+              <div class="product-action">
+                <div class="product-action-style product_buy">
+                  <a class="action-cart" title="Add To Cart" href="#" data-abc="true">
+                    <i class="fa fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card">
+            <img src="../img/ChainBracelets/talbot_mooring_silver.jpg">
+            <div class="card-body">
+              <div class="product_info">
+                <div class="product_name"><a href="product_detail.html">Tablot Mooring Silver</a></div>
+                <div class="product_price">$95.00</div>
+              </div>
+              <div class="product-action">
+                <div class="product-action-style product_buy">
+                  <a class="action-cart" title="Add To Cart" href="#" data-abc="true">
+                    <i class="fa fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card">
+            <img src="../img/ChainBracelets/padstow_mooring_silver.jpg">
+            <div class="card-body">
+              <div class="product_info">
+                <div class="product_name"><a href="product_detail.html">Padstow Mooring Silver</a></div>
+                <div class="product_price">$105.00</div>
+              </div>
+              <div class="product-action">
+                <div class="product-action-style product_buy">
+                  <a class="action-cart" title="Add To Cart" href="#" data-abc="true">
+                    <i class="fa fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="card">
+            <img src="../img/ChainBracelets/brixham_mooring_silver.jpg">
+            <div class="card-body">
+              <div class="product_info">
+                <div class="product_name"><a href="product_detail.html">Birxham Mooring Silver</a></div>
+                <div class="product_price">$105.00</div>
+              </div>
+              <div class="product-action">
+                <div class="product-action-style product_buy">
+                  <a class="action-cart" title="Add To Cart" href="#" data-abc="true">
+                    <i class="fa fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="card">
+            <img src="../img/ChainBracelets/pembroke_morning_silver.jpg">
+            <div class="card-body">
+              <div class="product_info">
+                <div class="product_name"><a href="product_detail.html">Pemroke Mooring Silver</a></div>
+                <div class="product_price">$125.00</div>
+              </div>
+              <div class="product-action">
+                <div class="product-action-style product_buy">
+                  <a class="action-cart" title="Add To Cart" href="#" data-abc="true">
+                    <i class="fa fa-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

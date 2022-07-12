@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div class="category">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title_container text-center">
+                    <div class="section_subtitle">Shopping cart</div>
+                </div>
+
+                <!--Shopping cart-->
+                <div class="pb-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+
+                                <!-- Shopping cart table -->
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="table-header">
+                                                <th scope="col" class="border-0">
+                                                    <div class="p-2 px-3">Product</div>
+                                                </th>
+                                                <th scope="col" class="border-0">
+                                                    <div class="py-2">Price</div>
+                                                </th>
+                                                <!-- <th scope="col" class="border-0">
+                                                    <div class="py-2">Quantity</div>
+                                                </th> -->
+                                                <th scope="col" class="border-0">
+                                                    <div class="py-2">Remove</div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if totalprice != 0 %}   
+                                            {% for bracelet in order.bracelets %}
+                                            <tr>
+                                                <td scope="row" class="border-0">
+                                                    <div class="p-2">
+                                                        <!-- <img src="../img/LeatherBracelets/coal_black_cullen.jpg"
+                                                            alt="" width="70" class="img-fluid rounded shadow-sm"> -->
+                                                        <div class="ml-3 d-inline-block align-middle">
+                                                            <h5 class="mb-0">
+                                                                <a href="{{ url_for('main.getproductdetails', braceletid=bracelet.id, categoryid=bracelet.category_id) }}"
+                                                                    class="text-dark d-inline-block align-middle">
+                                                                    {{ bracelet.name }}
+                                                                </a>
+                                                            </h5>
+                                                            <!-- <span class="text-muted font-weight-normal font-italic d-block">
+                                                                Category: Leather Bracelets</span> -->
+                                                            <!-- <span class="text-muted font-weight-normal font-italic d-block">
+                                                                    Size: XS(17cm)
+                                                            </span> -->
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="border-0 align-middle">
+                                                    <strong id="price">{{"$%.2f"|format(bracelet.price)}}</strong>
+                                                </td>
+                                                <!-- <td class="border-0 align-middle">
+                                                    <select class="form-control" id="quantityFormControl">
+                                                        <option selected>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </td> -->
+                                                <td class="border-0 align-middle">
+                                                    <form id="deleteitemform" method="POST" action="{{url_for('main.deleteorderitem')}}">
+                                                        <input type="hidden" id="id" name="id" value="{{bracelet.id}}">
+                                                        <a class="text-dark" onclick="document.getElementById('deleteitemform').submit()">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            <tr>
+                                                <td scope="row" class="border-1 float-center text-right">
+                                                    <strong id="price">Total price:</strong>
+                                                </td>
+                                                <td class="border-1 align-middle">
+                                                    <strong id="price">{{"$%.2f"|format(totalprice)}}</strong>
+                                                </td>
+                                            </tr>
+                                            {% else %}
+                                                <tr><td>Your cart is empty now!</td></tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                    <div class="p-4 float-right">
+                                        <form action="{{ url_for('main.checkout') }}">
+                                            <input class="btn cart_button button" type="submit" value="Place Order">
+                                        </form>
+                                    </div>
+                                    <!-- <div class="p-4 float-right">
+                                        <a href="{{url_for('main.placeorder')}}">Place Order</a>
+                                    </div> -->
+                                    <div class="p-4 float-right">
+                                        <form action="{{ url_for('main.deleteorder') }}">
+                                            <input class="btn cart_button button" type="submit" value="Empty Basket">
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- End -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
